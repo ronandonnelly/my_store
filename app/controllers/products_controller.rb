@@ -23,14 +23,15 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
 
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+    if @product.save
+      # Handle image upload
+      if params[:product][:image].present?
+        @product.image.attach(params[:product][:image])
       end
+
+      redirect_to @product, notice: 'Product was successfully created.'
+    else
+      render :new
     end
   end
 
@@ -71,6 +72,6 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:name, :description, :price)
+      params.require(:product).permit(:name, :description, :price, :image)
     end
 end

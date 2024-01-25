@@ -1,13 +1,51 @@
+<style>
+    .product-image {
+        max-width: 200px;
+    }
+
+    /* Style for the product boxes */
+    .product {
+        border: 1px solid #ccc; /* Grey outline */
+        padding: 10px;
+        margin: 10px;
+        border-radius: 5px;
+    }
+
+    /* Style for the "More Info" button */
+    .more-info-button {
+        background-color: #007bff; /* Blue background color */
+        color: white;
+        padding: 5px 10px;
+        text-decoration: none;
+        border-radius: 3px;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+    }
+
+    .more-info-button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+</style>
+
 <p style="color: green"><%= notice %></p>
 
 <h1>Products</h1>
 
 <div id="products">
   <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
+    <div class="product">
+      <h2><%= product.name %></h2>
+      <p><%= product.description %></p>
+
+      <% if product.image.attached? %>
+        <%= image_tag product.image, class: "product-image" %>
+      <% end %>
+
+      <p>Price: <%= ActiveSupport::NumberHelper.number_to_currency(product.price / 100.0, unit: "£", precision: 2) %></p>
+      <p>
+        <%= link_to "More Info", product, class: "more-info-button" %>
+      </p>
+    </div>
   <% end %>
 </div>
 

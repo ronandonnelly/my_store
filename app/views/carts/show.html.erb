@@ -1,0 +1,12 @@
+<h1>Your Cart</h1>
+<% if @cart.cart_items.any? %>
+  <% @cart.cart_items.each do |item| %>
+    <div>
+      <p><%= item.product.name %></p>
+      <p>Quantity: <%= item.quantity %></p>
+      <p>Price: <%= number_to_currency(item.product.price * item.quantity) %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>Your cart is empty.</p>
+<% end %>

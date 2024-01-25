@@ -1,10 +1,16 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @order %>
-
-<div>
-  <%= link_to "Edit this order", edit_order_path(@order) %> |
-  <%= link_to "Back to orders", orders_path %>
-
-  <%= button_to "Destroy this order", @order, method: :delete %>
+<div id="<%= dom_id @order %>">
+  <% @order.order_items.each do |item| %>
+    <p>
+      <strong>Product:</strong>
+      <%= item.product&.name || 'Product not available' %>
+    </p>
+    <p>
+      <strong>Quantity:</strong>
+      <%= item.quantity %>
+    </p>
+    <p>
+      <strong>Price:</strong>
+      <%= ActiveSupport::NumberHelper.number_to_currency(item.product.price * item.quantity / 100, unit: "£", precision: 2) %>
+    </p>
+  <% end %>
 </div>

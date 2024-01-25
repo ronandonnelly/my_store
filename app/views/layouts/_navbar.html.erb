@@ -1,30 +1,126 @@
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="/">Shop</a>
-  <div>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item <%= 'active' if current_page?(root_path) %>">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="nav-item <%= 'active' if current_page?(products_path) %>">
-        <a class="nav-link" href="/products">Products</a>
-      </li>
-      <li class="nav-item <%= 'active' if current_page?(orders_path) %>">
-        <a class="nav-link" href="/orders">Orders</a>
-      </li>
-      <!-- Assuming cart_path exists -->
-      <li class="nav-item <%= 'active' if current_page?(cart_path) %>">
-        <a class="nav-link" href="/cart">Shopping Cart</a>
-      </li>
-    </ul>
-  </div>
+<!-- _navbar.html.erb -->
+<!--begin::Fonts-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+<!--end::Fonts-->
+<style>
+    .navbar {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        height: 100vh;
+        width: 250px;
+        background-color: #014a5b;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+
+    body {
+        padding-left: 250px;
+    }
+
+    @media (max-width: 768px) {
+        .navbar {
+            position: static;
+            width: 100%;
+            height: auto;
+        }
+        body {
+            padding-left: 0;
+        }
+    }
+
+    .nav-link1 {
+        display: block;
+        padding: 10px;
+        color: #ADD8E6;
+        text-decoration: none;
+        text-align: center;
+        font-family: Poppins, Helvetica, "sans-serif"   ;
+    }
+
+    .navbar-brand {
+        padding: 10px;
+        display: block;
+        width: 100%;
+    }
+
+    .navbar-brand img {
+        width: 100%;
+        height: auto;
+    }
+
+    .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        list-style: none;
+        padding: 0;
+    }
+
+    .nav-item {
+        width: 100%;
+    }
+
+    .form-inline {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 10px;
+        margin-top: auto;
+    }
+
+    .btn {
+        width: 100%;
+        background-color: #2d46b9;
+        color: white;
+        border-color: #2d46b9;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .btn:last-child {
+        margin-bottom: 0;
+    }
+
+    @media (max-width: 768px) {
+        .navbar {
+            width: 100%;
+            height: auto;
+        }
+        .form-inline {
+            margin-top: 10px;
+        }
+    }
+</style>
+
+<nav class="navbar navbar-light">
+  <a class="navbar-brand" href="/">
+    <img src="https://pbs.twimg.com/profile_images/1598366609218965504/KGBJhv_M_400x400.jpg" alt="Shop">
+  </a>
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item <%= 'active' if current_page?(root_path) %>">
+      <a class="nav-link1" href="/">Home</a>
+    </li>
+    <li class="nav-item <%= 'active' if current_page?(products_path) %>">
+      <a class="nav-link1" href="/products">Products</a>
+    </li>
+    <li class="nav-item <%= 'active' if current_page?(orders_path) %>">
+      <a class="nav-link1" href="/orders">Orders</a>
+    </li>
+    <li class="nav-item <%= 'active' if current_page?(cart_path) %>">
+      <a class="nav-link1" href="/cart">Shopping Cart</a>
+    </li>
+  </ul>
   <form class="form-inline">
     <% if user_signed_in? %>
-      <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-outline-primary' %>
+      <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-primary' %>
     <% else %>
-      <%= link_to 'Login', new_user_session_path, class: 'btn btn-outline-primary' %>
-      <div style="padding-left: 10px;">
-        <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-outline-success' %>
-      </div>
+      <%= link_to 'Login', new_user_session_path, class: 'btn btn-primary' %>
+      <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-success' %>
     <% end %>
   </form>
 </nav>

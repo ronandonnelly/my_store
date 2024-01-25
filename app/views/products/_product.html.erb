@@ -1,3 +1,8 @@
+<style>
+    .product-image {
+        max-width: 200px;
+    }
+</style>
 <div id="<%= dom_id product %>">
   <p>
     <strong>Name:</strong>
@@ -11,7 +16,13 @@
 
   <p>
     <strong>Price:</strong>
-    <%= product.price %>
+  <%= ActiveSupport::NumberHelper.number_to_currency(product.price / 100.0, unit: "£", precision: 2) %>
   </p>
 
+  <p>
+    <strong>Image:</strong>
+    <% if @product.image.attached? %>
+      <%= image_tag @product.image, class: "product-image" %>
+    <% end %>
+  </p>
 </div>

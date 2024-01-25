@@ -1,12 +1,17 @@
+<!-- app/views/orders/_order.html.erb -->
 <div id="<%= dom_id order %>">
+  <% order.order_items.each do |item| %>
+    <p>
+      <strong>Product:</strong>
+      <%= item.product.name %>
+    </p>
+    <p>
+      <strong>Quantity:</strong>
+      <%= item.quantity %>
+    </p>
+    <!-- Include other item details as needed -->
+  <% end %>
   <p>
-    <strong>Product:</strong>
-    <%= order.product_id %>
+    <%= link_to "Show this order", order_path(order) %>
   </p>
-
-  <p>
-    <strong>Quantity:</strong>
-    <%= order.quantity %>
-  </p>
-
 </div>

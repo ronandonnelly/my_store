@@ -11,15 +11,16 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :product_id, style: "display: block" %>
-    <%= form.number_field :product_id %>
-  </div>
-
-  <div>
-    <%= form.label :quantity, style: "display: block" %>
-    <%= form.number_field :quantity %>
-  </div>
+  <%= form.fields_for :order_items do |item_form| %>
+    <div>
+      <%= item_form.label :product_id, "Product", style: "display: block" %>
+      <%= item_form.collection_select :product_id, Product.all, :id, :name, prompt: "Select a Product" %>
+    </div>
+    <div>
+      <%= item_form.label :quantity, style: "display: block" %>
+      <%= item_form.number_field :quantity %>
+    </div>
+  <% end %>
 
   <div>
     <%= form.submit %>
